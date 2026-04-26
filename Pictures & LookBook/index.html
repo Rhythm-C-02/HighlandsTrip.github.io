@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Day. One Road. All of Scotland.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal: #1a5c52; --teal-mid: #2d6b5e; --teal-light: #9fd4c4;
+    --teal-pale: #e8f4f0; --teal-pale2: #c8e8e0;
+    --cream: #f8f5f0; --white: #fdfcfa;
+    --text-dark: #1c1c1a; --text-mid: #3d3d39; --text-muted: #7a7a74;
+    --gold: #c9a96e;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Cormorant Garamond', Georgia, serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
+
+  /* COVER */
+  .cover { min-height: 100vh; background: var(--teal); display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+  .cover-inner { padding: 5rem 5rem 3rem; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .cover-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--teal-light); margin-bottom: 2.5rem; }
+  .cover-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(52px, 9vw, 96px); font-weight: 400; line-height: 1.05; color: var(--white); margin-bottom: 2.5rem; }
+  .cover-title em { font-style: italic; color: var(--teal-light); }
+  .cover-line { width: 60px; height: 1px; background: var(--gold); margin-bottom: 2rem; }
+  .cover-route { font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--teal-light); line-height: 2.5; }
+  .cover-route span { margin-right: 2rem; }
+  .cover-route span::after { content: '·'; margin-left: 2rem; color: var(--gold); opacity: 0.5; }
+  .cover-route span:last-child::after { display: none; }
+  .cover-bottom { padding: 2rem 5rem; border-top: 0.5px solid rgba(159,212,196,0.2); display: flex; justify-content: space-between; align-items: center; }
+  .cover-date { font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal-light); opacity: 0.6; }
+  .cover-tagline { font-style: italic; font-size: 15px; color: rgba(253,252,250,0.45); }
+
+  /* TYPOGRAPHY */
+  .eyebrow { font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--teal-mid); margin-bottom: 1rem; }
+  .eyebrow-light { font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--teal-light); margin-bottom: 1rem; }
+  .title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(30px, 4vw, 50px); font-weight: 400; line-height: 1.15; margin-bottom: 1.5rem; }
+  .title-dark { color: var(--text-dark); }
+  .title-light { color: var(--white); }
+  .em-dark { font-style: italic; color: var(--teal-mid); }
+  .em-light { font-style: italic; color: var(--teal-light); }
+  .body { font-size: 18px; line-height: 1.9; font-weight: 300; }
+  .body-dark { color: var(--text-mid); }
+  .body-light { color: rgba(253,252,250,0.9); }
+  .gold-line { width: 50px; height: 1px; background: var(--gold); margin: 1.8rem 0; }
+  .sep { height: 1px; background: linear-gradient(to right, transparent, var(--teal-pale2), transparent); }
+
+  /* SECTIONS */
+  .s-cream { background: var(--cream); padding: 5rem; }
+  .s-white { background: var(--white); padding: 5rem; }
+  .s-teal { background: var(--teal); padding: 5rem; }
+  .s-pale { background: var(--teal-pale); padding: 5rem; }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .grid-2-top { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
+
+  /* IMAGES — natural sizing, no forced crops */
+  img { display: block; width: 80%; height: auto; border-radius: 4px; margin: 0 auto; }
+  .img-full { width: 100%; height: 400px; object-fit: cover; display: block; }
+
+  /* VIDEO */
+  video { width: 100%; border-radius: 8px; display: block; object-fit: contain; }
+
+  /* SONG CARD */
+  .song-dark { background: rgba(255,255,255,0.06); border: 0.5px solid rgba(159,212,196,0.2); border-radius: 8px; padding: 1.5rem 2rem; margin-top: 2rem; }
+  .song-light { background: var(--white); border: 0.5px solid var(--teal-pale2); border-radius: 8px; padding: 1.5rem 2rem; margin-top: 2rem; }
+  .song-label { font-family: 'Montserrat', sans-serif; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .sl-dark { color: var(--teal-light); } .sl-light { color: var(--teal-mid); }
+  .song-title { font-family: 'Playfair Display', Georgia, serif; font-size: 19px; font-weight: 400; margin-bottom: 0.2rem; }
+  .st-dark { color: var(--white); } .st-light { color: var(--teal); }
+  .song-artist { font-size: 13px; font-style: italic; }
+  .sa-dark { color: rgba(159,212,196,0.8); } .sa-light { color: var(--text-muted); }
+  .song-note { font-size: 13px; margin-top: 0.4rem; line-height: 1.6; }
+  .sn-dark { color: rgba(159,212,196,0.65); } .sn-light { color: var(--text-muted); }
+
+  /* QUOTE */
+  .quote { border-left: 2px solid var(--gold); padding: 1.25rem 1.75rem; margin: 2rem 0; border-radius: 0 4px 4px 0; }
+  .quote-teal { background: rgba(159,212,196,0.07); }
+  .quote-pale { background: var(--teal-pale); }
+  .quote-text { font-size: 20px; font-style: italic; line-height: 1.7; font-weight: 400; }
+  .qt-light { color: var(--white); } .qt-dark { color: var(--teal); }
+
+  /* STATS */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 0.5px solid rgba(159,212,196,0.2); border-bottom: 0.5px solid rgba(159,212,196,0.2); margin: 2.5rem 0; }
+  .stat { padding: 2rem 1rem; border-right: 0.5px solid rgba(159,212,196,0.15); text-align: center; }
+  .stat:last-child { border-right: none; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 400; color: var(--white); line-height: 1; margin-bottom: 0.4rem; }
+  .stat-lbl { font-family: 'Montserrat', sans-serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal-light); opacity: 0.7; }
+
+  /* BADGE */
+  .badge { display: inline-block; background: var(--gold); color: #2a1f0a; font-family: 'Montserrat', sans-serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 1.2rem; font-weight: 500; }
+
+  /* CLOSING */
+  .closing { background: var(--teal); padding: 7rem 5rem; text-align: center; }
+  .closing-title { font-family: 'Playfair Display', serif; font-size: clamp(24px, 3.5vw, 42px); font-weight: 400; font-style: italic; color: var(--white); line-height: 1.5; max-width: 720px; margin: 0 auto; }
+  .closing-sub { font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--teal-light); opacity: 0.5; }
+  .gold-bar { width: 40px; height: 1px; background: var(--gold); margin: 2.5rem auto; }
+
+  @media(max-width: 768px) {
+    .s-cream, .s-white, .s-teal, .s-pale { padding: 3rem 1.5rem; }
+    .grid-2, .grid-2-top, .grid-3 { grid-template-columns: 1fr; }
+    .cover-inner { padding: 3rem 2rem 2rem; }
+    .cover-bottom { padding: 1.5rem 2rem; flex-direction: column; gap: 1rem; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .closing { padding: 4rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-inner">
+    <p class="cover-eyebrow">A personal travel lookbook · Scotland</p>
+    <h1 class="cover-title">One Day.<br>One Road.<br><em>All of Scotland.</em></h1>
+    <div class="cover-line"></div>
+    <p class="cover-route">
+      <span>Callander</span><span>Loch Lomond</span><span>Glencoe</span><span>Spean Bridge</span><span>Loch Ness</span><span>Perthshire</span>
+    </p>
+  </div>
+  <div class="cover-bottom">
+    <span class="cover-date">March 2026</span>
+    <span class="cover-tagline">Six stops. A lifetime of Scotland.</span>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="s-teal">
+  <p class="eyebrow-light">the numbers</p>
+  <div class="stats">
+    <div class="stat"><p class="stat-num">1</p><p class="stat-lbl">Day</p></div>
+    <div class="stat"><p class="stat-num">6</p><p class="stat-lbl">Stops</p></div>
+    <div class="stat"><p class="stat-num">∞</p><p class="stat-lbl">Miles of wonder</p></div>
+    <div class="stat"><p class="stat-num">0</p><p class="stat-lbl">Nessie sightings</p></div>
+  </div>
+  <p class="body body-light" style="max-width: 720px;">Scotland doesn't reveal itself gradually. It arrives all at once — in the smell of morning air over a loch, in the silence of a moor that seems to have no edges, in the warmth of a Highland cow who looks at you like you've always belonged. This is one day on one road through all of it.</p>
+</section>
+
+<div class="sep"></div>
+
+<!-- STOP 1: CALLANDER -->
+<section class="s-white">
+  <p class="eyebrow">stop one · where it begins</p>
+  <h2 class="title title-dark">Callander — <span class="em-dark">slow mornings &amp; stone streets</span></h2>
+  <div class="gold-line"></div>
+  <div class="grid-2" style="align-items: start; margin-top: 1rem;">
+    <div>
+      <p class="body body-dark">Callander arrives quietly, stone-fronted shops, a high street that hasn't rushed itself in decades, the kind of coffee that tastes better because everything around you is unhurried. There is something deeply nostalgic about this town, as if it exists slightly outside of time. The perfect place to ease into a day that will ask everything of you.</p>
+      <div class="song-light">
+        <p class="song-label sl-light">♪ mood setter</p>
+        <p class="song-title st-light">The Water is Wide</p>
+        <p class="song-artist sa-light">Karla Bonoff</p>
+        <p class="song-note sn-light">For slow mornings in stone towns that feel like memories</p>
+      </div>
+    </div>
+    <img src="IMG_4944.JPG" alt="Callander high street">
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- STOP 2: LOCH LOMOND / TROSSACHS / RANNOCH MOOR -->
+<section class="s-teal">
+  <p class="eyebrow-light">stop two · loch lomond, trossachs &amp; rannoch moor</p>
+  <h2 class="title title-light">Where Scotland <span class="em-light">starts showing off</span></h2>
+  <div class="gold-line"></div>
+  <p class="body body-light" style="max-width: 720px; margin-bottom: 3rem;">Some of Scotland doesn't ask you to stop. It simply unfolds outside your window, a slow, cinematic reveal that no screen could do justice to. The water appeared first, a deep dark blue that the sky seemed to be borrowing its colour from. Then the mountains arrived, dusted with snow at their crowns, indifferent to how beautiful they looked. Through Loch Lomond, through the Trossachs, through Rannoch Moor, the world kept emptying itself, getting bigger, getting quieter. This is where Scotland stops being a place and becomes a feeling. And you understand, pressing your face to the glass, why people cross oceans to get here.</p>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start;">
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <img src="IMG20260328111712_01.jpg" alt="Loch Lomond jetty">
+      <img src="IMG_5068.JPG" alt="Snowy mountains from window">
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <img src="IMG-20260328-WA0173.jpg" alt="Highland landscape">
+      <video autoplay muted loop playsinline>
+        <source src="VID20260328111441.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+  <div class="song-dark" style="max-width: 420px; margin-top: 3rem;">
+    <p class="song-label sl-dark">♪ mood setter</p>
+    <p class="song-title st-dark">The Bonnie Banks of Loch Lomond</p>
+    <p class="song-artist sa-dark">Ella Roberts</p>
+    <p class="song-note sn-dark">The old road, the bonnie banks — some songs were written for exactly this view</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- STOP 3: GLENCOE -->
+<img src="IMG_5237.JPG" class="img-full" alt="Glencoe valley">
+<section class="s-cream">
+  <p class="eyebrow">stop three · glencoe</p>
+  <h2 class="title title-dark">Dramatic. <span class="em-dark">Cinematic.</span> Breathtaking.</h2>
+  <div class="gold-line"></div>
+  <div class="grid-2" style="align-items: start;">
+    <div>
+      <p class="body body-dark">You stop. You don't plan to, but you do. The valley just opens up in front of you, mountains on both sides, snow at the top, that road cutting straight through the middle of all of it. There are no words for it really. You just stand there and look. It is the most cinematic place on earth, and you feel it in your chest before your eyes have finished adjusting.</p>
+      <div class="song-light">
+        <p class="song-label sl-light">♪ mood setter</p>
+        <p class="song-title st-light">The Gael - Last of the Mohicans</p>
+        <p class="song-artist sa-light">Dougie MacLean</p>
+        <p class="song-note sn-light">The Last of the Mohicans theme — written for a glen exactly like this one</p>
+      </div>
+      <img src="IMG_5238.JPG" alt="Sheep grazing" style="margin-top: 1.5rem;">
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <img src="IMG20260328114153.jpg" alt="Glencoe road">
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- STOP 4: COMMANDO MEMORIAL -->
+<section class="s-teal">
+  <div class="grid-2" style="align-items: start;">
+    <img src="IMG_5416.JPG" alt="Commando Memorial">
+    <div>
+      <p class="eyebrow-light">stop four · spean bridge</p>
+      <h2 class="title title-light">United <span class="em-light">We Conquer</span></h2>
+      <div class="gold-line"></div>
+      <p class="body body-light">There is a moment when you stand before the Commando Memorial and the scale of it finds you. The bronze, yes, but more than that, the landscape behind it. The same hills where Britain's most elite soldiers trained in bitter cold, carrying impossible weight over impossible terrain. The inscription reads "United We Conquer" and the mountains behind it look exactly as they must have looked then. Unchanged. Unimpressed. Eternal.</p>
+      <div class="quote quote-teal">
+        <p class="quote-text qt-light">"The countryside was their training ground. Today it stood as their monument."</p>
+      </div>
+      <div class="song-dark">
+        <p class="song-label sl-dark">♪ mood setter</p>
+        <p class="song-title st-dark">Ashokan Farewell</p>
+        <p class="song-artist sa-dark">Jay Ungar</p>
+        <p class="song-note sn-dark">For standing still in a landscape that holds history in its bones</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- STOP 5: LOCH NESS -->
+<section class="s-white">
+  <div class="badge">🐉 Monster Territory</div>
+  <p class="eyebrow">stop five · fort augustus &amp; loch ness</p>
+  <h2 class="title title-dark">Looking for <span class="em-dark">Nessie</span></h2>
+  <div class="gold-line"></div>
+  <div class="grid-2-top" style="gap: 5rem;">
+    <div>
+      <p class="body body-dark">Loch Ness is 23 miles long, 755 feet deep, and holds more fresh water than all the lakes in England and Wales combined. It is also, allegedly, home to a monster. We cannot confirm or deny. Standing at the edge of it, looking at the dark water and the impossible depth of it, one thought crossed our minds: if anything lives down there, we completely understand why it stays hidden. The loch has that quality. It keeps secrets beautifully.</p>
+      <div class="quote quote-pale">
+        <p class="quote-text qt-dark">"I stood at Loch Ness looking for Nessie. She didn't show up. But the loch was magnificent enough to forgive her for it."</p>
+      </div>
+      <div class="song-light">
+        <p class="song-label sl-light">♪ mood setter</p>
+        <p class="song-title st-light">Loch Lomond (Live)</p>
+        <p class="song-artist sa-light">Runrig</p>
+        <p class="song-note sn-light">Because every loch deserves a song and this one has earned more than most</p>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <img src="IMG_20260406_170604.jpg" alt="Loch Ness">
+      <img src="IMG-20260328-WA0112.jpg" alt="Fort Augustus">
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- STOP 6: HIGHLAND COWS -->
+<section class="s-white">
+  <p class="eyebrow">stop six · taste perthshire</p>
+  <h2 class="title title-dark">The Ones Who <span class="em-dark">Stole the Day</span></h2>
+  <div class="gold-line"></div>
+  <div class="grid-2-top" style="gap: 4rem;">
+    <div>
+      <p class="body body-dark">There is no elegant way to describe feeding a Highland cow. You arrive composed, you leave entirely charmed. These ancient, shaggy, magnificently horned creatures look at you from beneath curtains of auburn hair with an expression that can only be described as dignified tolerance. They accepted the offering in complete silence. They didn't need to say anything. The day ended with realisations: about slowness, about beauty, about how a country this small can hold this much wonder. About how much love you can develop for a place in a single road. Scotland does that to you. Quickly. Completely. Without apology.</p>
+      <video autoplay muted loop playsinline style="margin-top: 1.5rem;">
+        <source src="VID_20260328_192613.mp4" type="video/mp4">
+      </video>
+      <div class="song-light" style="margin-top: 1.5rem;">
+        <p class="song-label sl-light">♪ final song</p>
+        <p class="song-title st-light">Caledonia</p>
+        <p class="song-artist sa-light">Dougie MacLean</p>
+        <p class="song-note sn-light">For every drive home from Scotland, a full heart and a quiet kind of goodbye.</p>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <img src="IMG-20260328-WA0143.jpg" alt="Highland cow face on">
+      <img src="IMG-20260328-WA0176.jpg" alt="Highland cow">
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="gold-bar"></div>
+  <p class="closing-title">"One day on one road through Scotland teaches you something no guidebook can. That some places don't need a week to know them. They make themselves known immediately. Completely. Like they were waiting."</p>
+  <div class="gold-bar"></div>
+  <p class="closing-sub">One Day · March 2026 · Scotland</p>
+</section>
+
+</body>
+</html>
